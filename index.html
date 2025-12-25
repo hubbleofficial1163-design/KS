@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КСЕНИЯ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=EB+Garamond:wght@400;500;600&family=Cardo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gold: #C4A747;
+            --gold-light: #E6D8A5;
+            --dark-bg: #0c0c0c;
+            --dark-card: #1a1a1a;
+            --light-bg: #f8f6f0;
+            --light-card: #ffffff;
+            --text-dark: #1a1a1a;
+            --text-light: #e8e8e8;
+            --text-muted: #999;
+            --border-color: rgba(196, 167, 71, 0.15);
+            --transition: 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            background-color: var(--dark-bg);
+            font-family: 'Cardo', serif;
+            color: var(--text-light);
+            cursor: default;
+            line-height: 1.7;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: none;
+        }
+
+        /* Минималистичный хедер */
+        .minimal-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2.5rem 3rem;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+            transform: translateY(0);
+        }
+
+        .minimal-header.hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        .site-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--text-light);
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        .nav-divider {
+            width: 40px;
+            height: 1px;
+            background: var(--primary-gold);
+            margin: 0 2rem;
+        }
+
+        /* Hero секция */
+        .elegant-hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-video-elegant {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.2;
+            filter: grayscale(30%) contrast(1.1);
+        }
+
+        .hero-content-elegant {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .hero-title-elegant {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5.5rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            letter-spacing: 3px;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1.2s 0.3s forwards;
+        }
+
+        .hero-subtitle-elegant {
+            font-size: 1rem;
+            letter-spacing: 8px;
+            color: var(--text-muted);
+            font-weight: 300;
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.2s 0.6s forwards;
+        }
+
+        /* ИДЕАЛЬНАЯ ГАЛЕРЕЯ */
+        .video-triptych {
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 1px;
+            background: #000;
+        }
+
+        .video-panel {
+            position: relative;
+            overflow: hidden;
+            filter: grayscale(100%) brightness(0.8);
+            transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .video-panel video, .video-panel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .video-panel:hover {
+            filter: grayscale(0%) brightness(1);
+            transform: scale(1.05);
+            z-index: 2;
+            box-shadow: 0 0 80px rgba(212, 175, 55, 0.3);
+        }
+
+        .video-panel:hover video, .video-panel:hover img {
+            transform: scale(1.1);
+        }
+
+        .video-overlay-text {
+            position: absolute;
+            bottom: 3rem;
+            left: 3rem;
+            color: var(--text-light);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s 0.2s;
+            background: rgba(0,0,0,0.7);
+            padding: 1.5rem 2rem;
+            border-radius: 2px;
+            border-left: 3px solid var(--primary-gold);
+            max-width: 300px;
+        }
+
+        .video-overlay-text h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .video-overlay-text p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .video-panel:hover .video-overlay-text {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Бесконечный горизонтальный скролл - НЕ ОСТАНАВЛИВАЕТСЯ ПРИ НАВЕДЕНИИ */
+        .infinite-scroll {
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(90deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        .scroll-track {
+            display: flex;
+            position: absolute;
+            left: 0;
+            height: 100%;
+            animation: scrollHorizontal 20s linear infinite;
+            pointer-events: none; /* Это предотвращает остановку при наведении */
+        }
+
+        .scroll-item {
+            height: 100%;
+            min-width: 400px;
+            margin: 0 10px;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+            filter: brightness(0.6);
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            pointer-events: auto; /* А на сами фото наведение работает */
+        }
+
+        .scroll-item:hover {
+            filter: brightness(1);
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+
+        .scroll-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s;
+        }
+
+        .scroll-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .scroll-number {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: rgba(0,0,0,0.8);
+            color: var(--text-light);
+            padding: 0.6rem 1.2rem;
+            border-radius: 2px;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        @keyframes scrollHorizontal {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Зеркальная секция С ВИДЕО 4.mp4 и 5.mp4 */
+        .mirror-section {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mirror-container {
+            display: flex;
+            height: 100%;
+        }
+
+        .mirror-half {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mirror-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) brightness(0.8) contrast(1.1);
+            transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .mirror-half:hover .mirror-video {
+            transform: scale(1.05);
+            filter: grayscale(0%) brightness(1) contrast(1);
+        }
+
+        .mirror-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(212, 175, 55, 0.08) 0%, 
+                rgba(74, 144, 226, 0.12) 50%, 
+                rgba(155, 81, 224, 0.08) 100%);
+            mix-blend-mode: overlay;
+            transition: all 0.8s;
+        }
+
+        .mirror-half:hover .mirror-overlay {
+            background: linear-gradient(45deg, 
+                rgba(212, 175, 55, 0.15) 0%, 
+                rgba(74, 144, 226, 0.2) 50%, 
+                rgba(155, 81, 224, 0.15) 100%);
+        }
+
+        .mirror-info {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--text-light);
+            text-align: center;
+            z-index: 2;
+            opacity: 0;
+            transition: all 0.8s;
+            background: rgba(0,0,0,0.7);
+            padding: 2rem;
+            border-radius: 2px;
+            min-width: 250px;
+        }
+
+        .mirror-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .mirror-info p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .mirror-half:hover .mirror-info {
+            opacity: 1;
+        }
+
+        /* СЕКРЕТНАЯ СЕКЦИЯ */
+        .secret-chamber {
+            min-height: 100vh;
+            position: relative;
+            background: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem;
+        }
+
+        .chamber-container {
+            max-width: 700px;
+            width: 100%;
+            position: relative;
+        }
+
+        .chamber-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .chamber-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 500;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .chamber-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        .access-panel {
+            background: rgba(26, 26, 26, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            padding: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .access-instruction {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            text-align: center;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .code-input-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .code-digit {
+            width: 60px;
+            height: 60px;
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            font-size: 1.8rem;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .code-digit:focus {
+            border-color: var(--primary-gold);
+            background: rgba(196, 167, 71, 0.05);
+        }
+
+        .access-hint {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 1.5rem;
+            font-weight: 300;
+        }
+
+        .secret-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease;
+            background: rgba(26, 26, 26, 0.6);
+            border: 1px solid var(--border-color);
+            padding: 4rem;
+        }
+
+        .secret-content.revealed {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .secret-letter {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.9;
+            margin-bottom: 3rem;
+        }
+
+        .letter-signature {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            text-align: right;
+        }
+
+        .signature-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--primary-gold);
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .signature-date {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .secret-photo-final {
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .secret-photo-final img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            filter: grayscale(30%) contrast(1.1);
+            transition: all 1s ease;
+        }
+
+        .secret-photo-final:hover img {
+            filter: grayscale(0%) contrast(1);
+        }
+
+        .photo-caption-elegant {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        /* Футер */
+        .elegant-footer {
+            padding: 4rem 2rem;
+            background: var(--dark-bg);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        .footer-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        /* Анимации */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1200px) {
+            .hero-title-elegant {
+                font-size: 4.5rem;
+            }
+            
+            .scroll-item {
+                min-width: 350px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-title-elegant {
+                font-size: 3.8rem;
+            }
+            
+            .video-triptych {
+                grid-template-columns: 1fr;
+                height: 300vh;
+            }
+            
+            .code-digit {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .chamber-container {
+                max-width: 600px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .minimal-header {
+                padding: 2rem;
+            }
+            
+            .hero-title-elegant {
+                font-size: 3rem;
+                letter-spacing: 2px;
+            }
+            
+            .hero-subtitle-elegant {
+                letter-spacing: 5px;
+                font-size: 0.9rem;
+            }
+            
+            .scroll-item {
+                min-width: 300px;
+            }
+            
+            .chamber-title {
+                font-size: 2.2rem;
+            }
+            
+            .access-panel, .secret-content {
+                padding: 2rem;
+            }
+            
+            .secret-photo-final img {
+                height: 350px;
+            }
+            
+            .code-input-container {
+                gap: 0.7rem;
+            }
+            
+            .code-digit {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title-elegant {
+                font-size: 2.5rem;
+            }
+            
+            .scroll-item {
+                min-width: 250px;
+            }
+            
+            .chamber-title {
+                font-size: 1.8rem;
+            }
+            
+            .code-digit {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .footer-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Скроллбар */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(196, 167, 71, 0.3);
+            border-radius: 0;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(196, 167, 71, 0.5);
+        }
+
+        .mirror-half:last-child .mirror-video {
+            object-position: 0% 50%; /* Сдвиг вправо в рамках контейнера */
+        }
+
+        .mirror-half:last-child:hover .mirror-video {
+            object-position: 0% 50%; /* При наведении можно вернуть чуть левее */
+        }
+
+
+        .secret-photo-final img {
+            object-position: center 77%; /* Сдвиг на 30% выше от центра */
+        }
+
+        .scroll-item:nth-child(11) img {
+            object-position: 80% 30%; /* 80% вправо, 30% сверху */
+        }
+
+        .scroll-item:nth-child(14) img {
+            object-position: 30% 30%; /* 80% вправо, 30% сверху */
+        }
+
+        .scroll-item:nth-child(17) img {
+            object-position: 80% 30%; /* 80% вправо, 30% сверху */
+        }
+
+        .hero-video-elegant {
+            object-position: center 40%; /* Сдвиг вниз на 60% */
+        }
+    
+    </style>
+</head>
+<body>
+    <!-- Минималистичный хедер -->
+    <header class="minimal-header" id="mainHeader">
+        <a href="#" class="site-title">Ksenia</a>
+        <div style="display: flex; align-items: center;">
+            <span style="font-size: 0.9rem; color: var(--text-muted); letter-spacing: 2px;">ГАЛЕРЕЯ</span>
+            <div class="nav-divider"></div>
+            <span style="font-size: 0.9rem; color: var(--text-muted); letter-spacing: 2px;">XVII</span>
+        </div>
+    </header>
+
+    <!-- Hero секция -->
+    <section class="elegant-hero">
+        <video autoplay muted loop playsinline class="hero-video-elegant">
+            <source src="v2.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content-elegant">
+            <h1 class="hero-title-elegant">КСЕНИЯ</h1>
+            <p class="hero-subtitle-elegant">XVII МОМЕНТОВ</p>
+        </div>
+    </section>
+
+    <!-- ИДЕАЛЬНАЯ ГАЛЕРЕЯ: Видео триптих -->
+    <section class="video-triptych">
+        <div class="video-panel">
+            <video autoplay muted loop playsinline>
+                <source src="v1.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay-text">
+                <h3>ФОТОСЕССИЯ</h3>
+                <p>Короткие моменты за кадром</p>
+            </div>
+        </div>
+        
+        <div class="video-panel">
+            <video autoplay muted loop playsinline>
+                <source src="v2.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay-text">
+                <h3>ЛИЧНЫЙ ВЗГЛЯД</h3>
+                <p>Строгий костюм</p>
+            </div>
+        </div>
+        
+        <div class="video-panel">
+            <video autoplay muted loop playsinline>
+                <source src="v3.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay-text">
+                <h3>ЛИЧНЫЙ ВЗГЛЯД</h3>
+                <p>Фронтальная камера, настоящее настроение</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ИДЕАЛЬНАЯ ГАЛЕРЕЯ: Бесконечный горизонтальный скролл -->
+    <section class="infinite-scroll">
+        <div class="scroll-track" id="scrollTrack">
+            <!-- Все 17 фото будут добавлены через JS -->
+        </div>
+    </section>
+
+    <!-- ЗЕРКАЛЬНАЯ СЕКЦИЯ С ВИДЕО 4.mp4 и 5.mp4 -->
+    <section class="mirror-section">
+        <div class="mirror-container">
+            <div class="mirror-half">
+                <video autoplay muted loop playsinline class="mirror-video">
+                    <source src="4.mp4" type="video/mp4">
+                </video>
+                <div class="mirror-overlay"></div>
+                <div class="mirror-info">
+                    <h3>Ксения и Надежда</h3>
+                    <p>Главное, что бы не холодно</p>
+                </div>
+            </div>
+            
+            <div class="mirror-half">
+                <video autoplay muted loop playsinline class="mirror-video">
+                    <source src="5.mp4" type="video/mp4">
+                </video>
+                <div class="mirror-overlay"></div>
+                <div class="mirror-info">
+                    <h3>Ксения и Надежда</h3>
+                    <p>Главное, что бы не жарко</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- СЕКРЕТНАЯ СЕКЦИЯ -->
+    <section class="secret-chamber">
+        <div class="chamber-container">
+            <div class="chamber-header">
+                <h2 class="chamber-title">ДОСТУП ОГРАНИЧЕН</h2>
+                <p class="chamber-subtitle">ПЕРСОНАЛЬНЫЙ РАЗДЕЛ</p>
+            </div>
+            
+            <div class="access-panel">
+                <p class="access-instruction">
+                    Для доступа к персональному разделу требуется четырехзначный код. 
+                    Введите цифры, которые представляют значимую дату.
+                </p>
+                
+                <div class="code-input-container">
+                    <input type="text" maxlength="1" class="code-digit" data-index="0" id="digit1">
+                    <input type="text" maxlength="1" class="code-digit" data-index="1" id="digit2">
+                    <input type="text" maxlength="1" class="code-digit" data-index="2" id="digit3">
+                    <input type="text" maxlength="1" class="code-digit" data-index="3" id="digit4">
+                </div>
+                
+                <p class="access-hint">1510</p>
+            </div>
+            
+            <div class="secret-content" id="secretContent">
+                <div class="secret-letter">
+                    <p style="margin-bottom: 1.8rem;">Уважаемая Ксения,</p>
+                    
+                    <p style="margin-bottom: 1.8rem;">
+                        Вы успешно получили доступ к персональному разделу. 
+                        Этот цифровой проект был создан как визуальное исследование 
+                        вашей уникальной эстетики через семнадцать фотографий 
+                        и два видеоролика.
+                    </p>
+                    
+                    <p style="margin-bottom: 1.8rem;">
+                        Каждый кадр был выбран за его способность передавать 
+                        определенное качество или состояние. Голубые тона 
+                        представляют легкость и свободу, горные пейзажи — 
+                        стремление к высотам, морские кадры — глубину и 
+                        постоянное движение.
+                    </p>
+                    
+                    <p style="margin-bottom: 1.8rem;">
+                        Этот проект является доказательством того, что даже 
+                        в цифровом пространстве можно создать нечто личное 
+                        и значимое. Он существует как свидетельство внимания 
+                        к деталям, уважения к эстетике и признания уникальности.
+                    </p>
+                    
+                    <p style="margin-bottom: 1.8rem;">
+                        С уважением и вниманием к совершенству,
+                    </p>
+                </div>
+                
+                <div class="letter-signature">
+                    <div class="signature-name">Создатель проекта</div>
+                    <div class="signature-date">2024</div>
+                </div>
+                
+                <div class="secret-photo-final">
+                    <img src="4.jpg" alt="Финальное фото">
+                    <div class="photo-caption-elegant">
+                        Фотография №4 — вершина как символ достижения
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="elegant-footer">
+        <h3 class="footer-title">КСЕНИЯ</h3>
+        <p class="footer-subtitle">DIGITAL PORTRAIT</p>
+        <div class="copyright">
+            <p>© 2024 ВСЕ ПРАВА СОХРАНЕНЫ. ЭКСКЛЮЗИВНЫЙ КОНТЕНТ.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Автовоспроизведение всех видео на сайте
+        document.querySelectorAll('video').forEach(video => {
+            video.play().catch(e => {
+                console.log("Автовоспроизведение заблокировано, добавляем кнопку воспроизведения");
+                const playButton = document.createElement('div');
+                playButton.innerHTML = '<i class="fas fa-play"></i>';
+                playButton.style.cssText = `
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 60px;
+                    height: 60px;
+                    background: rgba(196, 167, 71, 0.8);
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    z-index: 10;
+                `;
+                playButton.addEventListener('click', () => {
+                    video.play();
+                    playButton.remove();
+                });
+                video.parentElement.style.position = 'relative';
+                video.parentElement.appendChild(playButton);
+            });
+        });
+
+        // Создание бесконечной галереи из 17 фото
+        const scrollTrack = document.getElementById('scrollTrack');
+        const allPhotos = [];
+        
+        for (let i = 1; i <= 17; i++) {
+            allPhotos.push(i);
+        }
+        
+        // Дублируем массив для плавного бесконечного эффекта
+        const duplicatedPhotos = [...allPhotos, ...allPhotos, ...allPhotos];
+        
+        // Создаем элементы галереи
+        duplicatedPhotos.forEach((photoNum, index) => {
+            const scrollItem = document.createElement('div');
+            scrollItem.className = 'scroll-item';
+            scrollItem.innerHTML = `
+                <img src="${photoNum}.jpg" alt="Фото ${photoNum}" loading="lazy">
+                <div class="scroll-number">#${photoNum}</div>
+            `;
+            
+            // Эффект наведения работает, но анимация НЕ останавливается
+            scrollItem.addEventListener('mouseenter', () => {
+                const items = document.querySelectorAll('.scroll-item');
+                items.forEach(item => {
+                    if (item !== scrollItem) {
+                        item.style.filter = 'brightness(0.4)';
+                    }
+                });
+            });
+            
+            scrollItem.addEventListener('mouseleave', () => {
+                const items = document.querySelectorAll('.scroll-item');
+                items.forEach(item => {
+                    item.style.filter = 'brightness(0.6)';
+                });
+            });
+            
+            scrollTrack.appendChild(scrollItem);
+        });
+
+        // УПРАВЛЕНИЕ ХЕДЕРОМ - скрываем при скролле вниз
+        const header = document.getElementById('mainHeader');
+        let lastScrollTop = 0;
+        let scrollTimeout;
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            // Прячем хедер при скролле вниз
+            if (currentScroll > lastScrollTop && currentScroll > 100) {
+                header.classList.add('hidden');
+            } else {
+                header.classList.remove('hidden');
+            }
+            
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+            
+            // Показываем хедер вверху страницы
+            if (currentScroll < 100) {
+                header.classList.remove('hidden');
+            }
+            
+            // Показываем хедер при обратном скролле
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                if (currentScroll < lastScrollTop && currentScroll > 100) {
+                    header.classList.remove('hidden');
+                }
+            }, 150);
+        });
+
+        // ФИКСИРУЕМ ПАРОЛЬ
+        const codeDigits = document.querySelectorAll('.code-digit');
+        const secretContent = document.getElementById('secretContent');
+        
+        const CORRECT_CODE = ['1', '5', '1', '0'];
+        let userCode = ['', '', '', ''];
+        
+        function handleDigitInput(e, index) {
+            let value = e.target.value;
+            value = value.replace(/[^0-9]/g, '');
+            
+            if (value.length > 1) {
+                value = value[0];
+            }
+            
+            e.target.value = value;
+            userCode[index] = value;
+            
+            if (value !== '' && index < 3) {
+                codeDigits[index + 1].focus();
+            }
+            
+            checkCode();
+        }
+        
+        function checkCode() {
+            const allFilled = userCode.every(digit => digit !== '');
+            
+            if (allFilled) {
+                const enteredCode = userCode.join('');
+                
+                if (enteredCode === '1510') {
+                    showSuccess();
+                } else {
+                    showError();
+                }
+            }
+        }
+        
+        function showSuccess() {
+            codeDigits.forEach(digit => {
+                digit.style.borderColor = 'var(--primary-gold)';
+                digit.style.color = 'var(--primary-gold)';
+                digit.style.background = 'rgba(196, 167, 71, 0.05)';
+                digit.disabled = true;
+                digit.readOnly = true;
+            });
+            
+            setTimeout(() => {
+                secretContent.classList.add('revealed');
+                
+                setTimeout(() => {
+                    secretContent.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }, 300);
+            }, 800);
+        }
+        
+        function showError() {
+            codeDigits.forEach(digit => {
+                digit.style.borderColor = 'rgba(200, 50, 50, 0.7)';
+                digit.style.animation = 'shake 0.5s';
+            });
+            
+            setTimeout(() => {
+                codeDigits.forEach((digit, index) => {
+                    digit.style.animation = '';
+                    digit.value = '';
+                    digit.style.borderColor = 'var(--border-color)';
+                    digit.style.color = 'var(--text-light)';
+                    digit.style.background = 'rgba(10, 10, 10, 0.8)';
+                    userCode[index] = '';
+                });
+                codeDigits[0].focus();
+            }, 500);
+        }
+        
+        codeDigits.forEach((digit, index) => {
+            digit.addEventListener('input', (e) => handleDigitInput(e, index));
+            
+            digit.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && digit.value === '' && index > 0) {
+                    e.preventDefault();
+                    codeDigits[index - 1].focus();
+                }
+                else if (e.key === 'ArrowLeft' && index > 0) {
+                    e.preventDefault();
+                    codeDigits[index - 1].focus();
+                }
+                else if (e.key === 'ArrowRight' && index < 3) {
+                    e.preventDefault();
+                    codeDigits[index + 1].focus();
+                }
+            });
+            
+            digit.addEventListener('focus', function() {
+                this.style.background = 'rgba(196, 167, 71, 0.1)';
+                this.style.borderColor = 'var(--primary-gold)';
+            });
+            
+            digit.addEventListener('blur', function() {
+                if (!this.disabled) {
+                    this.style.background = 'rgba(10, 10, 10, 0.8)';
+                    this.style.borderColor = 'var(--border-color)';
+                }
+            });
+        });
+
+        // Автофокус на поле ввода при загрузке секции
+        const secretChamber = document.querySelector('.secret-chamber');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !codeDigits[0].disabled) {
+                    setTimeout(() => {
+                        codeDigits[0].focus();
+                    }, 300);
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        observer.observe(secretChamber);
+
+        // Плавное появление секций при скролле
+        const sectionObserverOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, sectionObserverOptions);
+
+        // Наблюдаем за секциями
+        document.querySelectorAll('.video-triptych, .infinite-scroll, .mirror-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'all 1s ease';
+            sectionObserver.observe(section);
+        });
+
+        // Обработка клика по заголовку для скролла вверх
+        document.querySelector('.site-title').addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            header.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
