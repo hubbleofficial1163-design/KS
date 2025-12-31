@@ -220,7 +220,7 @@
             left: 0;
             height: 100%;
             animation: scrollHorizontal 20s linear infinite;
-            pointer-events: none; /* Это предотвращает остановку при наведении */
+            pointer-events: none;
         }
 
         .scroll-item {
@@ -232,7 +232,7 @@
             position: relative;
             filter: brightness(0.6);
             transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-            pointer-events: auto; /* А на сами фото наведение работает */
+            pointer-events: auto;
         }
 
         .scroll-item:hover {
@@ -435,6 +435,7 @@
             color: var(--text-light);
             transition: all 0.3s ease;
             outline: none;
+            caret-color: var(--primary-gold);
         }
 
         .code-digit:focus {
@@ -449,6 +450,8 @@
             font-style: italic;
             margin-top: 1.5rem;
             font-weight: 300;
+            cursor: default;
+            user-select: none;
         }
 
         .secret-content {
@@ -685,34 +688,61 @@
         }
 
         .mirror-half:last-child .mirror-video {
-            object-position: 0% 50%; /* Сдвиг вправо в рамках контейнера */
+            object-position: 0% 50%;
         }
 
         .mirror-half:last-child:hover .mirror-video {
-            object-position: 0% 50%; /* При наведении можно вернуть чуть левее */
+            object-position: 0% 50%;
         }
 
-
         .secret-photo-final img {
-            object-position: center 77%; /* Сдвиг на 30% выше от центра */
+            object-position: center 77%;
         }
 
         .scroll-item:nth-child(11) img {
-            object-position: 80% 30%; /* 80% вправо, 30% сверху */
+            object-position: 80% 30%;
         }
 
         .scroll-item:nth-child(14) img {
-            object-position: 30% 30%; /* 80% вправо, 30% сверху */
+            object-position: 30% 30%;
         }
 
         .scroll-item:nth-child(17) img {
-            object-position: 80% 30%; /* 80% вправо, 30% сверху */
+            object-position: 80% 30%;
         }
 
         .hero-video-elegant {
-            object-position: center 40%; /* Сдвиг вниз на 60% */
+            object-position: center 40%;
         }
-    
+
+        /* Мобильные улучшения */
+        @media (max-width: 768px) {
+            .access-panel {
+                padding: 1.5rem;
+            }
+            
+            .code-digit {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .access-instruction {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .code-input-container {
+                gap: 0.5rem;
+            }
+            
+            .code-digit {
+                width: 35px;
+                height: 35px;
+                font-size: 1.1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -814,60 +844,61 @@
             
             <div class="access-panel">
                 <p class="access-instruction">
-                    Для доступа к персональному разделу требуется четырехзначный код. 
-                    Введите цифры, которые представляют значимую дату.
+                    Для доступа к секретному разделу требуется четырехзначный код.
                 </p>
                 
                 <div class="code-input-container">
-                    <input type="text" maxlength="1" class="code-digit" data-index="0" id="digit1">
-                    <input type="text" maxlength="1" class="code-digit" data-index="1" id="digit2">
-                    <input type="text" maxlength="1" class="code-digit" data-index="2" id="digit3">
-                    <input type="text" maxlength="1" class="code-digit" data-index="3" id="digit4">
+                    <input type="text" maxlength="1" class="code-digit" data-index="0" id="digit1" inputmode="numeric" pattern="[0-9]*">
+                    <input type="text" maxlength="1" class="code-digit" data-index="1" id="digit2" inputmode="numeric" pattern="[0-9]*">
+                    <input type="text" maxlength="1" class="code-digit" data-index="2" id="digit3" inputmode="numeric" pattern="[0-9]*">
+                    <input type="text" maxlength="1" class="code-digit" data-index="3" id="digit4" inputmode="numeric" pattern="[0-9]*">
                 </div>
                 
-                <p class="access-hint">1510</p>
+                <p class="access-hint">(Вы знаете пароль)</p>
             </div>
             
             <div class="secret-content" id="secretContent">
                 <div class="secret-letter">
-                    <p style="margin-bottom: 1.8rem;">Уважаемая Ксения,</p>
+                    <p style="margin-bottom: 1.8rem;">Дорогая Ксения,</p>
                     
                     <p style="margin-bottom: 1.8rem;">
                         Вы успешно получили доступ к персональному разделу. 
-                        Этот цифровой проект был создан как визуальное исследование 
-                        вашей уникальной эстетики через семнадцать фотографий 
-                        и два видеоролика.
+                        Этот цифровой проект был создан как плацдарм, который
+                        мы можем переделаыть как угодно и для чего угодно.
                     </p>
                     
                     <p style="margin-bottom: 1.8rem;">
-                        Каждый кадр был выбран за его способность передавать 
-                        определенное качество или состояние. Голубые тона 
-                        представляют легкость и свободу, горные пейзажи — 
-                        стремление к высотам, морские кадры — глубину и 
-                        постоянное движение.
+                        Каждый кадр был выбран за его способность вызывать
+                        особенные чувства при просмотре. Невозможно спокойно
+                        смотреть на твои фото, обязательно, что то будет
+                        происходить в груди.
                     </p>
                     
                     <p style="margin-bottom: 1.8rem;">
-                        Этот проект является доказательством того, что даже 
-                        в цифровом пространстве можно создать нечто личное 
-                        и значимое. Он существует как свидетельство внимания 
-                        к деталям, уважения к эстетике и признания уникальности.
+                        Я хочу сказать тебе, любимая, - огромное спасибо,
+                        за очередной прожитый год вместе. Ты всегда лелала
+                        для меня только лучшее. Ты являешься лучшим человеком
+                        в моей жизни. Ты являешься самым красивым человеком
+                        в моей жизни. Ксения, ты самая лучшая девушка в мире.
+                        Я желаю тебе в новом году, оставваться такой же прекрасной
+                        (ты предел возможностей для этого мира), быть самой 
+                        счастливой и удачливой!!!
                     </p>
                     
                     <p style="margin-bottom: 1.8rem;">
-                        С уважением и вниманием к совершенству,
+                        С любовью,
                     </p>
                 </div>
                 
                 <div class="letter-signature">
-                    <div class="signature-name">Создатель проекта</div>
-                    <div class="signature-date">2024</div>
+                    <div class="signature-name">твой Владлен</div>
+                    <div class="signature-date">2026</div>
                 </div>
                 
                 <div class="secret-photo-final">
                     <img src="4.jpg" alt="Финальное фото">
                     <div class="photo-caption-elegant">
-                        Фотография №4 — вершина как символ достижения
+                        Фотография №4 — вершина как символ предела возможностей
                     </div>
                 </div>
             </div>
@@ -876,10 +907,10 @@
 
     <!-- Футер -->
     <footer class="elegant-footer">
-        <h3 class="footer-title">КСЕНИЯ</h3>
+        <h3 class="footer-title">Ksenia Filatova</h3>
         <p class="footer-subtitle">DIGITAL PORTRAIT</p>
         <div class="copyright">
-            <p>© 2024 ВСЕ ПРАВА СОХРАНЕНЫ. ЭКСКЛЮЗИВНЫЙ КОНТЕНТ.</p>
+            <p>© 2026 Эксклюзивный контент.</p>
         </div>
     </footer>
 
@@ -1095,21 +1126,12 @@
                     this.style.borderColor = 'var(--border-color)';
                 }
             });
+            
+            // Предотвращаем автофокус на мобильных устройствах
+            digit.addEventListener('touchstart', function(e) {
+                // Не предотвращаем по умолчанию, чтобы позволить пользователю тапнуть на поле
+            }, { passive: true });
         });
-
-        // Автофокус на поле ввода при загрузке секции
-        const secretChamber = document.querySelector('.secret-chamber');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !codeDigits[0].disabled) {
-                    setTimeout(() => {
-                        codeDigits[0].focus();
-                    }, 300);
-                }
-            });
-        }, { threshold: 0.3 });
-        
-        observer.observe(secretChamber);
 
         // Плавное появление секций при скролле
         const sectionObserverOptions = {
@@ -1143,6 +1165,52 @@
             });
             header.classList.remove('hidden');
         });
+
+        // ПРЕДОТВРАЩАЕМ АВТООТКРЫТИЕ КЛАВИАТУРЫ НА МОБИЛЬНЫХ УСТРОЙСТВАХ
+        document.addEventListener('DOMContentLoaded', function() {
+            // Проверяем, является ли устройство мобильным
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                console.log('Мобильное устройство обнаружено - автофокус отключен');
+                
+                // Добавляем обработчик клика на панель доступа
+                const accessPanel = document.querySelector('.access-panel');
+                const hintText = document.querySelector('.access-hint');
+                const originalHint = hintText.textContent;
+                
+                accessPanel.addEventListener('click', function(e) {
+                    // Если клик был не на поле ввода
+                    if (!e.target.classList.contains('code-digit')) {
+                        // Показываем подсказку
+                        hintText.textContent = 'Нажмите на поле для ввода кода';
+                        hintText.style.color = 'var(--primary-gold)';
+                        
+                        setTimeout(() => {
+                            hintText.textContent = originalHint;
+                            hintText.style.color = '';
+                        }, 2000);
+                    }
+                });
+                
+                // Также добавляем обработчик для каждого поля ввода
+                codeDigits.forEach(digit => {
+                    digit.addEventListener('touchstart', function(e) {
+                        // Даем небольшую задержку перед фокусом для лучшего UX
+                        setTimeout(() => {
+                            if (!this.disabled) {
+                                this.focus();
+                            }
+                        }, 100);
+                    }, { passive: true });
+                });
+            }
+        });
+
+        // Обработка касания на мобильных устройствах для улучшения UX
+        document.addEventListener('touchstart', function() {
+            // Пустая функция для лучшей отзывчивости на мобильных устройствах
+        }, { passive: true });
     </script>
 </body>
 </html>
